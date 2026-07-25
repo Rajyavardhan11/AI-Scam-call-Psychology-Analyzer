@@ -1,4 +1,4 @@
-﻿"""
+"""
 SurakshaCall AI — Deterministic Rule Engine
 Owner: Lakshay
 Task: L-04
@@ -50,6 +50,14 @@ PATTERNS = {
         "SECRET_REQUEST",
         re.compile(r"message\s*(mein|me|mai).*(code|number|ank)", re.I),
     ),
+    "secret_indirect_hi_04": (
+        "SECRET_REQUEST",
+        re.compile(r"(jo|jo\s*bhi)\s*(code|otp|number|ank).*(bata|share|de|batao|bataiye|dijiye)", re.I),
+    ),
+    "secret_indirect_hi_05": (
+        "SECRET_REQUEST",
+        re.compile(r"(code|otp)\s*(aaya|aya|aai).*(bata|share|de|batao|bataiye|dijiye|woh\s*bata)", re.I),
+    ),
 
     # ── PAYMENT_REQUEST ─────────────────────────────────────────────────────
     "payment_safe_account_en": (
@@ -62,7 +70,11 @@ PATTERNS = {
     ),
     "payment_upi_collect": (
         "PAYMENT_REQUEST",
-        re.compile(r"(approve|accept|confirm)\s*(upi|collect|payment)\s*(request|req)", re.I),
+        re.compile(r"(approve|accept|confirm).{0,20}(upi|collect|payment).{0,20}(request|req)", re.I),
+    ),
+    "payment_upi_collect_reverse": (
+        "PAYMENT_REQUEST",
+        re.compile(r"(upi|collect).{0,20}(request|req).{0,20}(approve|accept|confirm|sent)", re.I),
     ),
     "payment_qr_scam": (
         "PAYMENT_REQUEST",
